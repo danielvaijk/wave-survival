@@ -1,0 +1,50 @@
+These are important things to note while utilizing this package.
+
+[Quickstart]
+
+Inside the lobby: Press 'R' to toggle between 'Ready' and 'Not Ready'
+Escape Menu: Press 'Escape' to toggle the escape menu
+Interaction: Press 'E' to interact with interactable objects
+Shooting: Press the left mouse button to shoot
+Aiming: Hold the right mouse button to aim
+Reloading: Press 'R' to reload the weapon
+
+
+[Notes]
+
+1. Be very carefull when renaming GameObjects in the Scene, since many scripts search for GameObjects based on its name;
+2. Be very carefull when renaming tags and changing GameObject tags, since many scripts search for GameObjects based on its tag;
+3. If something is not working as expected, try reading on the script specific to that GameObject/action, I've put in a few
+guidelines on scripts that were relevant to them;
+
+
+[Configuration]
+
+I used LogMeIn Hamachi to test the networking features with a friend in another country, aside from VPN's you could alternatively
+open a port in your router.
+
+For local testing I used the NetworkFramework default (127.0.0.1 : 25000)
+
+
+[External Assets]
+
+None sounds in this project were made by me;
+Most of the textures were not made by me (most of them are from the Unity bootcamp demo)
+
+
+[Fun Facts]
+
+Total amount of scripts: 23 scripts
+Total amount of lines of code: 3577 lines of code
+Script with most lines of code: NetworkFramework (488 lines of code)
+
+
+[Extra]
+
+If you wish, you can send me reviews of any of my assets/work, including constructive criticism or just a user experience review overall.
+You can send a private message to my armedunity account (danielvd), or comment a review on any of my asset posts.
+
+Alternatively you can also send me a review via my website http://www.vaijk.net where you can also find other things made by me like assets,
+community contributions and others.
+
+I hope you enjoy the package. Thank you for the support :)

@@ -1,0 +1,263 @@
+CHANGELOG v2.0
+
+*   = Bug resulted from erroneous design, but does not interfere with gameplay
+**  = Bug from Unity
+*** = Bug from Unity, but does not interfere with gameplay
+
+
+EXTERNAL ASSETS
+
+Bootcamp demo by Unity Technologies (sounds, particles, textures)
+Farland Skies - Cloudy Crown by Borodar (textures)
+(none of the sounds were made by me, but are royalty free)
+
+
+GENERAL
+
+Added
+
+* ThrowableEditor script for the Throwable script
+* WeaponEditor script for the Weapon script
+* Support for custom in-game scenes
+* Singleton UIManager script
+* Mecanim support
+* Modified assets from the Unity Bootcamp Demo (particles, textures, sounds)
+* AutoDestroy script
+* TextFade script
+* Interactable script
+* Currency sound (for charges and gains)
+* SkyboxRotater script
+* Support for animations speed values (i.e. walking animation speed proportinal to movement speed)
+* New map with ambient mood (ambient sounds, fog, lighting, etc)
+* Barricade 
+
+Changed
+
+* Updated old GUI system to the new UI system
+* Old PlayerHealth script infused in the NetworkUser script
+* Old PlayerInteraction script infused in the NetworkUser script
+* Changed to PlayerPrefs class for registry data management
+* Added default values for public variables
+* WaveSpawn script renamed to WaveManager script
+* Lobby ready states now have colors (red and green)
+* Big scripts like (ZombieAI, NetworkFramework, NetworkUser, etc) now have regions to make the code more organized
+* Changed old 'Example Game' scene to 'Demo' scene
+* Added certain 'editor mistake' invalidation preventions on most complicated scripts (e.g. a min value being bigger than a max value)
+
+Fixed
+
+* All console warnings/errors for obsolete/deprecated functions
+* Random.Range with exclusive max set to (length - 1) in some situations
+* Fixed barricade accessing planks from last to first (inverse of intended)
+* UI not scaling properly to different screen resolutions
+
+Optimized
+
+* Cleaned code commenting for easier reading and understanding
+* Cleared unnecessary references and any spaghetti code
+* Cleaned up clustered scene objects and configuration
+* Cleaned up project files and references
+
+Removed
+
+* RegistryData script
+* Crosshair script
+
+Bugs
+
+* Decals will inherit scale and rotation from non-uniform objects, thus deforming their shape
+* Decals won't project onto complex mesh surfaces (by design, still W.I.P.)
+* While having the editor paused if you compile a script, all the text from UI elements will get filled**
+
+
+NETWORKING
+
+Added
+
+* Rewritten singleton NetworkFramework script
+* Completely rewritten Network Menu
+* Support for animations over the Network
+* NetworkCallback script
+* NetworkSync script (alternative for synchronizing poisitions and rotations over the network smoothly)
+* Round robin Player spawning system
+* Better disconnection handling (both inside the lobby and game) for requested disconnection or application quit
+* Added custom connection attempt timeout (workaround to not being able to access the NetworkManager.Timeouts variables)
+
+Changed
+
+* Updated old raknet networking system to the new UNET system
+* Position and rotation synchronization over the Network is custom (not using built-in components)
+* Lobby system is custom made (not using built-in components)
+* NetworkFramework now references to a string variable for the online scene
+* Now you can disconnect in the middle of the game using the new escape menu
+
+Fixed
+
+* All console warnings/errors for obsolete/deprecated functions
+* Random sounds not playing the same AudioClip over the Network
+
+Optimized
+
+* NetworkFramework lobby check for ready players
+* Barricade networking features
+* Commands and ClientRPC's use specific QoS channels for packet sending/receiving
+
+Removed
+
+* NetworkLobby script
+* Old NetworkFramework script
+
+Bugs
+
+* InternalAddPlayer playerControllerId higher than expected: 0 warning***
+* NetworkAnimator throwing NullReferenceException for NetworkAnimator component (randomly appears sometimes and goes away)***
+* Host instance will remain freezed if you alt-tab frequently in a small amount of time, until a Client disconnects**
+* If a connection attempt is made and you host a Server, you will become both (Server + Client) + Client***
+
+GAMEPLAY
+
+Added
+
+* In-game Escape Menu
+* FireDamage script
+* Fire particle with DPS (damage per second)
+* DecalMaterial system (material penetration, entry and exit decals and particles, splatter decals).
+* DecalMaterialEditor script for the DecalMaterial script
+* Decal textures and hit particles
+* Throwable script adding support for throwable items (grenades and molotovs)
+* New item type => Utility
+* New Utility items => Grenades and Molotovs
+* New Primary items => Rifle
+* Reload animations for all weapons (except utility)
+* Weapon click sounds when trying to shoot with no loaded ammo (from bootcamp demo)
+* New sound effects for all the weapons
+* Repair complete sound for barricades
+* Barricade plank alpha fade-in when being repaired
+* Completely rewritten MouseRotation script
+
+Changed
+
+* Adapted Weapon system to support 1 NetworkIdentity per Player GameObject root
+* Weapon damage and Zombie health are now floating point numbers
+* Reduced the barricade plank brake force from 400f to 50f
+* Renamed Test Pistol to Pistol
+* Bolt-action weapon types now have loaded ammo clamped to 1
+* The loadedAmmo or storedAmmo values are now clamped towards their respective maximums
+* Player camera Y (X) axis viewing angle adjusted from (80 , -80) to (65 , -50)
+* Increased Pistol and Machine Gun firing ranges
+* Adjusted weapon damage values
+* Barricades are considered static obstacles in the NavMesh, thus seperating the inner part and the outter part of the map
+* Barricades are now Off Mesh Links, providing access to the inner part of the map to Zombies
+* Wave Manager will wait untill all the Players are spawned, then it will start spawning Zombies
+* Players now spawn rotated based on the spawn point rotation
+* Barricades will now adapt their plank objects based on its starting current health
+* Barricade script now has a new <maxHealth> value, and the current health value is clamped between 0f and <maxHealth>
+* Barricade planks now have a rigidbody added procedurally if barricade physics is enabled
+
+Fixed
+
+* All console warnings/errors for obsolete/deprecated functions
+* A few bugs and flaws related to barricade repair and health management
+* MouseRotation script forcing rotation to start on a Vector3.Zero for euler angles
+* Weapon shot raycast not ignoring destroyed planks on a barricade
+* Barricades calculating destruction damage amounts based on starting <currentHealth> (fixed with new <maxHealth> value)
+* Fixed mouse cursor being confined to game window instead of being locked at screen center
+
+Optimized
+
+* Weapon shooting and reloading
+* Barricade behaviour and management
+
+Removed
+
+* Old barricade sounds
+* Test decal prefab
+
+
+PLAYER
+
+Added
+
+* New Player model
+* New Zombie Player model
+* Player animations => walking, idle, reloading
+* Player regeneratable health
+* Damage UI texture proportional to missing health
+* Player idle state
+* Custom Player ragdoll body
+* Custom Zombie Player ragdoll body
+* Player sounds when taking damage (from bootcamp demo)
+* Player breathing sound with volume proportional to missing health (from bootcamp demo)
+* New Player walking sounds (from bootcamp demo)
+* Players now spawn looking at the center of the map (based on spawnPoint rotation)
+
+Changed
+
+* Now the Player can't repair a barricade if he is not facing it
+* Reduced player interact distance
+* Player now becomes a Player Zombie when killed, and will attack other Players
+
+Fixed
+
+* Player tag not centering correctly over the Player
+* Player tag randomly not appearing in some instances
+* Player being able to shoot while reloading
+
+Removed
+
+* PlayerHealth script
+* PlayerInteraction script
+* Old Player prefab
+* Old Player sounds
+
+Bugs
+
+* Player arms will look out of place depending on X axis viewing angle*
+
+
+ZOMBIE
+
+Added
+
+* New Zombie model
+* Zombie animations => walking, attacking, screaming
+* Custom Zombie ragdoll body
+* New Zombie scream sounds (from opengameart.org)
+
+Changed
+
+* Zombie will now attack the Player from the outside the barricade, if he is inside the attack range. (Prevents unfair gameplay)
+* Zombie now searches all player objects everytime he needs a new target, preventing a reference to a disconnected/destroyed Player
+* Zombies now die instantly with headshots
+* Zombies now constantly check for which Player is closest, and will always go after the closest one to him
+* Zombie now uses his NavMeshAgent radius as a offset for his attack range.
+* Zombie now takes into account his fixed attack range + player interact distance to check if he can attack a Player from outside the barricade
+* Zombie now uses a sligtly more advanced way of checking his distance to a Player, being a distance between Vector3 positions while he is outside
+  and NavMeshPath distances while inside
+* Increased Zombie damage
+* Zombie now moves towards barricade Off Mesh Link start transform
+* Now using Quaternion.Slerp instead of NavMeshAgent updateRotation, so we can insure that the Zombie is always facing his target
+* Scream animation speed proportional to scream AudioClip length
+* Zombie will now move directly towards the closest Player, if no barricades have been found
+
+Fixed
+
+* Zombie would not update his rotation if he was not traversing a NavMeshPath
+* Attack timer will increment, even if the Zombie has no target (preventing attack delays)
+* Zombie checking current target status only when attacking (preventing target switching delays)
+* Zombie using NavMeshAgent stopping distance too large for attacking barricades
+
+Optimized
+
+* ZombieAI navigation and target selection
+
+Removed
+
+* Old Zombie prefab
+* Old Zombie sounds
+
+Bugs
+
+* Zombie will not face player while his target is a barricade, even if the zombie is attacking him*
+* Can not play a disabled audio source warning appearing when killing a zombie while he attempts to scream over the network (randomly appears)*
+* Rough Offmesh link jump from when transitioning from outside the barricade to inside (not really a bug)*
